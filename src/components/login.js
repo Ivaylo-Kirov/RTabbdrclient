@@ -8,6 +8,7 @@ class Login extends React.Component {
         this.state = {
             email: '',
             password: '',
+            unauthorized: ''
         }
         this.onInputChange = this.onInputChange.bind(this);
     }
@@ -28,7 +29,9 @@ class Login extends React.Component {
           .then((response) => {
             localStorage.setItem('loginToken', response.data);
           })
-          .catch((error) => console.log(error))
+          .catch((error) => {
+              this.setState({error: 'Unauthorized'})
+          })
     }
 
     render() {
@@ -45,6 +48,7 @@ class Login extends React.Component {
                         <Input type="password" name="password" id="drPassword" onChange={this.onInputChange} />
                     </FormGroup>
                     <Button>Submit</Button>
+                    {this.state.error && 'Unauthorized'}
                 </Form>
             </Col>
         )
