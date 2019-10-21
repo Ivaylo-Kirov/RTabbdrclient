@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Col, Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
 import axios from 'axios';
 
 class Login extends React.Component {
@@ -8,7 +8,7 @@ class Login extends React.Component {
         this.state = {
             email: '',
             password: '',
-            unauthorized: ''
+            unauthorized: false
         }
         this.onInputChange = this.onInputChange.bind(this);
     }
@@ -30,26 +30,31 @@ class Login extends React.Component {
             localStorage.setItem('loginToken', response.data);
           })
           .catch((error) => {
-              this.setState({error: 'Unauthorized'})
+              this.setState({error: true})
           })
     }
 
     render() {
         return(
             <Col>
-                Login
-                <Form onSubmit={this.submitForm}>
-                    <FormGroup>
-                        <Label for="drEmail">Email</Label>
-                        <Input type="email" name="email" id="drEmail" onChange={this.onInputChange} />
-                    </FormGroup>
-                    <FormGroup>
-                        <Label for="drPassword">Password</Label>
-                        <Input type="password" name="password" id="drPassword" onChange={this.onInputChange} />
-                    </FormGroup>
-                    <Button>Submit</Button>
-                    {this.state.error && 'Unauthorized'}
-                </Form>
+            <section className="jumbotron text-center">
+                <div className="container">
+                <h1 className="jumbotron-heading">Please log in below:</h1>
+                    <Form onSubmit={this.submitForm}>
+                        {this.state.error && <Alert color="danger">Unauthorized</Alert>}
+                        <FormGroup>
+                            <Label for="drEmail">Email</Label>
+                            <Input type="email" name="email" id="drEmail" onChange={this.onInputChange} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="drPassword">Password</Label>
+                            <Input type="password" name="password" id="drPassword" onChange={this.onInputChange} />
+                        </FormGroup>
+                        <Button>Submit</Button>
+                        
+                    </Form>
+                </div>
+            </section>
             </Col>
         )
     }
