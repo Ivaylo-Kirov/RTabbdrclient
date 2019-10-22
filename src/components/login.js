@@ -1,6 +1,8 @@
 import React from 'react'
 import { Col, Button, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
 import axios from 'axios';
+import {server} from '../config/server'
+
 
 class Login extends React.Component {
     constructor(props) {
@@ -22,7 +24,7 @@ class Login extends React.Component {
 
     submitForm = (e) => {
         e.preventDefault();
-        axios.post(('http://localhost:5000/login'), {
+        axios.post((`${server}login`), {
             email: this.state.email,
             password: this.state.password
           })

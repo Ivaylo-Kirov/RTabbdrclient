@@ -2,6 +2,7 @@ import React from 'react'
 import { Col, Button} from 'reactstrap'
 import axios from 'axios'
 import { Jumbotron } from 'reactstrap';
+import {server} from '../config/server'
 
 class Home extends React.Component {
     constructor(props) {
@@ -11,7 +12,7 @@ class Home extends React.Component {
         };
     }
     componentDidMount() {
-        axios.get('http://localhost:5000')
+        axios.get(server)
         .then((results) => {
             this.setState({doctors: results.data})
         })

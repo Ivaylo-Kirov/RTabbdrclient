@@ -1,6 +1,7 @@
 import React from 'react'
 import { Col} from 'reactstrap'
 import axios from 'axios'
+import {server} from '../config/server'
 
 class Profile extends React.Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class Profile extends React.Component {
                 headers: {'Authorization': "BEARER " + localStorage.getItem('loginToken')}
             };
             console.log(`toke: ${localStorage.getItem('loginToken')}`)
-            axios.get('http://localhost:5000/user', config)
+            axios.get(`${server}user`, config)
             .then((results) => {
                 this.setState({doctor: results.data})
             })
